@@ -27,6 +27,10 @@ ideas = {}
 def get_ideas(topic):
     return jsonify(ideas=[idea.serial() for idea in ideas[topic]])
 
+@app.route('/topics', methods = ['GET'])
+def get_topics():
+    return jsonify(topics=[topic for topic in ideas])
+
 @app.route('/ideas/<topic>', methods = ['POST'])
 def post_idea(topic):
     title = request.args.get('title')
@@ -34,7 +38,7 @@ def post_idea(topic):
     visible = request.args.get('visible')
     author = request.args.get('author')
     idea = Idea(topic, title, description, visible, author)
-    
+
     print("###########################################")
     print(idea.topic, idea.title, idea.description, idea.visible, idea.author)
     print("###########################################")
