@@ -39,10 +39,10 @@ class IdeaDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: "",
+      title: "Loading",
       description: "",
-      topic: "",
-      author: "",
+      topic: "Topic",
+      author: "Author",
       activeStep: 0,
       maxSteps: 0,
     };
@@ -57,6 +57,7 @@ class IdeaDetails extends Component {
         description,
         topic,
         author,
+        maxSteps: tutorialSteps.length,
       });
     });
   }
@@ -81,6 +82,7 @@ class IdeaDetails extends Component {
           }}
           interval={6000}
           enableMouseEvents
+          slideClassName="carousel"
         >
           {tutorialSteps.map((step, index) => (
             <div key={step.label}>
@@ -128,7 +130,9 @@ class IdeaDetails extends Component {
         />
         <div className="details-container">
           <h1 className="idea-details-title">{title}</h1>
-          <p>{author}</p>
+          <h3>
+            Created by <b>{author}</b>
+          </h3>
           <button type="button" className="topic-tag">
             {topic}
           </button>

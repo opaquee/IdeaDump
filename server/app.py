@@ -80,9 +80,7 @@ def post_idea(topic):
 @app.route("/idea/<ideaId>", methods=["GET"])
 def get_idea(ideaId):
     for topic in ideas:
-        print(topic)
         for idea in ideas[topic]:
-            print(idea.id, ideaId)
             if idea.id == ideaId:
                 return jsonify(idea.serial())
     return None
