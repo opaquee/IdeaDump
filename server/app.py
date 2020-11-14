@@ -5,11 +5,12 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import json
 import os
+import platform
 
 app = Flask(__name__)
 
 db_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'sqlite.db')
-if os.name == 'Windows':
+if platform.system() == 'Windows':
     db_URI = 'sqlite:///' + db_dir
 else:
     db_URI = 'sqlite:////' + db_dir
