@@ -41,14 +41,15 @@ def get_topics():
 
 @app.route("/ideas/<topic>", methods=["POST"])
 def post_idea(topic):
+    id = request.args.get("id")
     title = request.args.get("title")
     description = request.args.get("description")
     visible = request.args.get("visible")
     author = request.args.get("author")
-    idea = Idea(topic, title, description, visible, author)
+    idea = Idea(id, topic, title, description, visible, author)
 
     print("###########################################")
-    print(idea.topic, idea.title, idea.description, idea.visible, idea.author)
+    print(idea.id, idea.topic, idea.title, idea.description, idea.visible, idea.author)
     print("###########################################")
 
     if topic in ideas:
@@ -59,9 +60,12 @@ def post_idea(topic):
     return json.dumps(idea.__dict__)
 
 
-@app.route("/idea/<ideaId>", methods=["GET"])
-def get_idea(ideaId):
-    return jsonify(idea=[idea.serial() for idea in ideas[ideaId]])
+@app.route("/idea/<topic>/<ideaId>", methods=["GET"])
+def get_idea(topic, ideaId):
+    for idea in ideas[topic]:
+        if idea.id == ideaId:
+            return jsonify(idea.serial())
+    return None
 
 
 if __name__ == "__main__":
