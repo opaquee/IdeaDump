@@ -30,13 +30,13 @@ ideas = {
 
     "Projects": [
         Idea("Projects", "Multiplayer JavaScript Snake", "Javascript snake with multiplayer", True, "Tommy", "boog.png"),
-        Idea("Projects", "Pac-Man: Battle Royale Edition", , "Pac-man with fortnite style building", True, "Josh", "boog.png")
-    ]
+        Idea("Projects", "Pac-Man: Battle Royale Edition", "Pac-man with fortnite style building", True, "Josh", "boog.png")
+    ],
 
     "Pickles": [
         Idea("Pickles", "Pickle Sandwich", "A sandwich made of only pickles", True, "Henri", "boog.png"),
         Idea("Pickles", "BBQ pickles", "Barbequed pickles", True, "Michael", "boog.png")
-    ]
+    ],
 
     "Games": [
         Idea("Games", "Wizard game", "A wizard game with an in depth upgrade system", True, "Gary", "boog.png")
