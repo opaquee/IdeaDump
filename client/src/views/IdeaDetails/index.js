@@ -21,7 +21,6 @@ class IdeaDetails extends Component {
           "If PickleHack is so great, then why isn't there a PickleHack 2?",
         topic: "Pickles",
       },
-      activeStep: 0,
     });
   }
 
