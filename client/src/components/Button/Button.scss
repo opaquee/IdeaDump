@@ -4,7 +4,7 @@
   font-size: 1.2em;
   font-weight: 600;
   text-transform: uppercase;
-  background-color: #af452d;
+  background-color: $color-primary;
   color: white;
   padding: 20px;
   border-radius: 4px;
@@ -12,8 +12,15 @@
   cursor: pointer;
   min-width: 100px;
   font-family: $default-font;
+  outline: none;
+  transition-duration: 0.2s;
 
   &:hover {
-    background-color: #ea5f40;
+    background-color: $color-primary-light;
   }
+
+  &:active {
+    background-color: $color-primary-dark;
+  }
+
 }

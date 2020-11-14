@@ -1,10 +1,12 @@
+@import "../../index";
+
 .container {
   padding: 0px 150px 50px 150px;
 }
 
 .header {
   text-align: center;
-  color: #7aa543;
+  color: $color-primary;
   margin-bottom: 50px;
 }
 
@@ -32,7 +34,7 @@
 }
 
 .active {
-  background-color: #7aa543;
+  background-color: $color-primary;
   color: #ffffff;
 }
 
