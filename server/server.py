@@ -1,18 +1,19 @@
 #!flask/bin/python
-from flask import Flask, jsonify, abort, request, make_response, url_for
+from flask import Flask, jsonify, abort, request, make_response, url_for, send_file, send_from_directory, safe_join, abort
 from flask_httpauth import HTTPBasicAuth
 import json
+import os
 
 app = Flask(__name__)
 
-
 class Idea:
-    def __init__(self, topic, title, description, visible, author):
+    def __init__(self, topic, title, description, visible, author, imageName):
         self.topic = topic
         self.title = title
         self.description = description
         self.visible = visible
         self.author = author
+        self.imageName = imageName
 
     def serial(self):
         return {
@@ -21,11 +22,40 @@ class Idea:
             "description": self.description,
             "visible": self.visible,
             "author": self.author,
+            "imageName": self.imageName
         }
 
 
-ideas = {}
+ideas = {
 
+    "Projects": [
+        Idea("Projects", "Multiplayer JavaScript Snake", "Javascript snake with multiplayer", True, "Tommy", "boog.png"),
+        Idea("Projects", "Pac-Man: Battle Royale Edition", , "Pac-man with fortnite style building", True, "Josh", "boog.png")
+    ]
+
+    "Pickles": [
+        Idea("Pickles", "Pickle Sandwich", "A sandwich made of only pickles", True, "Henri", "boog.png"),
+        Idea("Pickles", "BBQ pickles", "Barbequed pickles", True, "Michael", "boog.png")
+    ]
+
+    "Games": [
+        Idea("Games", "Wizard game", "A wizard game with an in depth upgrade system", True, "Gary", "boog.png")
+    ]
+}
+
+@app.route("/image/", methods=["GET"])
+def get_image():
+    try:
+        name = request.args.get("name")
+        return send_file("img/" + name)
+    except FileNotFoundError:
+        abort(404)
+
+@app.route("/image/", methods=["POST"])
+def post_image():
+    if request.files:
+        image = request.files["image"]
+        image.save(os.path.join("img/", image))
 
 @app.route("/ideas/<topic>", methods=["GET"])
 def get_ideas(topic):
@@ -43,11 +73,8 @@ def post_idea(topic):
     description = request.args.get("description")
     visible = request.args.get("visible")
     author = request.args.get("author")
-    idea = Idea(topic, title, description, visible, author)
-
-    print("###########################################")
-    print(idea.topic, idea.title, idea.description, idea.visible, idea.author)
-    print("###########################################")
+    imageName = request.args.get("imageName")
+    idea = Idea(topic, title, description, visible, author, imageName)
 
     if topic in ideas:
         ideas[topic].append(idea)
