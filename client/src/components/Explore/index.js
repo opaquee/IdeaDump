@@ -1,4 +1,3 @@
-import React from "react";
 import "./Explore.scss";
 import React, { useState } from "react";
 
@@ -13,13 +12,6 @@ const topics = [
   "Kanye West",
   "Cult",
 ];
-const topicsDiv = topics.map((topic) => {
-  return (
-    <button className="topic" key={topic} type="button">
-      {topic}
-    </button>
-  );
-});
 
 function Explore() {
   const [active, setActive] = useState("Feed");
@@ -31,6 +23,8 @@ function Explore() {
   const topicsDiv = topics.map((topic) => {
     return (
       <button
+        type="button"
+        key={topic}
         className={active === topic ? "active topic" : "topic"}
         onClick={() => {
           activeClick(topic);
