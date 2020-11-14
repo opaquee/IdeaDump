@@ -3,11 +3,13 @@ from flask import Flask, jsonify, abort, request, make_response, url_for
 from flask_httpauth import HTTPBasicAuth
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_cors import CORS
 import json
 import os
 import platform
 
 app = Flask(__name__)
+cors = CORS(app)
 
 db_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'sqlite.db')
 if platform.system() == 'Windows':
