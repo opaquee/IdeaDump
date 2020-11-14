@@ -3,6 +3,7 @@ import { MobileStepper, Button } from "@material-ui/core";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
 import "./IdeaDetails.scss";
+import ApiClient from "../../ApiClient";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -38,17 +39,19 @@ class IdeaDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      idea: {
-        title: "",
-        description: "",
-        topic: "",
-      },
+      title: "",
+      description: "",
+      topic: "",
       activeStep: 0,
       maxSteps: 0,
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    const { ideaId } = this.props;
+    await ApiClient.get(`/idea/${ideaId}`).then((idea) => {
+      console.log(idea);
+    });
     this.setState({
       idea: {
         title: "PickleHack 2",
@@ -119,7 +122,7 @@ class IdeaDetails extends Component {
           }
         />
         <div className="details-container">
-          <h1 className="idea-title">{idea.title}</h1>
+          <h1 className="idea-details-title">{idea.title}</h1>
           <button type="button" className="topic-tag">
             {idea.topic}
           </button>

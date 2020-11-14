@@ -7,7 +7,8 @@ app = Flask(__name__)
 
 
 class Idea:
-    def __init__(self, topic, title, description, visible, author):
+    def __init__(self, id, topic, title, description, visible, author):
+        self.id = id
         self.topic = topic
         self.title = title
         self.description = description
@@ -16,6 +17,7 @@ class Idea:
 
     def serial(self):
         return {
+            "id": self.id,
             "topic": self.topic,
             "title": self.title,
             "description": self.description,
@@ -55,6 +57,11 @@ def post_idea(topic):
         ideas[topic] = [idea]
 
     return json.dumps(idea.__dict__)
+
+
+@app.route("/idea/<ideaId>", methods=["GET"])
+def get_idea(ideaId):
+    return jsonify(idea=[idea.serial() for idea in ideas[ideaId]])
 
 
 if __name__ == "__main__":

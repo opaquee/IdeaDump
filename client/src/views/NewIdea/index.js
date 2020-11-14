@@ -47,7 +47,7 @@ class NewIdea extends Component {
       <div className="page-container">
         <div className="left-container">
           <input
-            className="idea-title"
+            className="create-idea-title"
             placeholder="My New Idea"
             type="text"
             value={title}
