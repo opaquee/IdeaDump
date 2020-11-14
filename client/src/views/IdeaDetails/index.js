@@ -42,6 +42,7 @@ class IdeaDetails extends Component {
       title: "",
       description: "",
       topic: "",
+      author: "",
       activeStep: 0,
       maxSteps: 0,
     };
@@ -50,21 +51,25 @@ class IdeaDetails extends Component {
   async componentDidMount() {
     const { ideaId } = this.props;
     await ApiClient.get(`/idea/${ideaId}`).then((idea) => {
-      console.log(idea);
-    });
-    this.setState({
-      idea: {
-        title: "PickleHack 2",
-        description:
-          "If PickleHack is so great, then why isn't there a PickleHack 2?",
-        topic: "Pickles",
-      },
-      maxSteps: tutorialSteps.length,
+      const { title, description, topic, author } = idea;
+      this.setState({
+        title,
+        description,
+        topic,
+        author,
+      });
     });
   }
 
   render() {
-    const { idea, activeStep, maxSteps } = this.state;
+    const {
+      title,
+      description,
+      topic,
+      author,
+      activeStep,
+      maxSteps,
+    } = this.state;
     return (
       <div>
         <AutoPlaySwipeableViews
@@ -122,11 +127,12 @@ class IdeaDetails extends Component {
           }
         />
         <div className="details-container">
-          <h1 className="idea-details-title">{idea.title}</h1>
+          <h1 className="idea-details-title">{title}</h1>
+          <p>{author}</p>
           <button type="button" className="topic-tag">
-            {idea.topic}
+            {topic}
           </button>
-          <p>{idea.description}</p>
+          <p>{description}</p>
         </div>
       </div>
     );
