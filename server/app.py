@@ -1,10 +1,22 @@
 #!flask/bin/python
+# TODO: Cross-OS compability with filepaths. Only Unix-based support now
 from flask import Flask, jsonify, abort, request, make_response, url_for
 from flask_httpauth import HTTPBasicAuth
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 import json
+import os
 
 app = Flask(__name__)
 
+db_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'sqlite.db')
+db_URI = 'sqlite:////' + db_dir
+app.config['SQLALCHEMY_DATABASE_URI'] = db_URI
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
+
+from models import Topic
 
 class Idea:
     def __init__(self, topic, title, description, visible, author):
@@ -55,7 +67,3 @@ def post_idea(topic):
         ideas[topic] = [idea]
 
     return json.dumps(idea.__dict__)
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
