@@ -156,7 +156,7 @@ function Explore() {
     .map((idea, id) => {
       return (
         <div
-          key={id.toString}
+          key={id.toString()}
           className="idea"
           style={{ display: active === idea.topic ? "block" : "none" }}
         >
