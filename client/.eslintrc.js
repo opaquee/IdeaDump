@@ -1,34 +1,32 @@
 module.exports = {
-  "env": {
-      "browser": true,
-      "es6": true
+  env: {
+    browser: true,
+    es6: true,
   },
-  "extends": [
-      "airbnb",
-      "prettier",
-      "prettier/react",
-      "plugin:prettier/recommended",
-      "plugin:react/recommended"
+  extends: [
+    "airbnb",
+    "prettier",
+    "prettier/react",
+    "plugin:prettier/recommended",
+    "plugin:react/recommended",
   ],
-  "globals": {
-      "Atomics": "readonly",
-      "SharedArrayBuffer": "readonly"
+  globals: {
+    Atomics: "readonly",
+    SharedArrayBuffer: "readonly",
   },
-  "parserOptions": {
-      "ecmaFeatures": {
-          "jsx": true
-      },
-      "ecmaVersion": 2018,
-      "sourceType": "module"
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
+    },
+    ecmaVersion: 2018,
+    sourceType: "module",
   },
-  "plugins": [
-      "react",
-      "prettier"
-  ],
-  "rules": {
+  plugins: ["react", "prettier"],
+  rules: {
     "prettier/prettier": "error",
     "react/jsx-filename-extension": [
-        1, { "extensions": [".js", ".jsx", ".ts", ".tsx"]}
+      1,
+      { extensions: [".js", ".jsx", ".ts", ".tsx"] },
     ],
     "import/prefer-default-export": 0,
     "react/prop-types": 0,
@@ -39,15 +37,15 @@ module.exports = {
         js: "never",
         jsx: "never",
         ts: "never",
-        tsx: "never"
-      }
+        tsx: "never",
+      },
     ],
   },
-  "settings": {
+  settings: {
     "import/resolver": {
-      "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
-      }
-    }
-  }
-}
+      node: {
+        extensions: [".js", ".jsx", ".ts", ".tsx"],
+      },
+    },
+  },
+};

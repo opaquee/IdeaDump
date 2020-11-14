@@ -1,5 +1,7 @@
+@import "../../index";
+
 .page-container {
-  margin: 3rem 2rem 3rem 2rem;
+  margin: 50px 150px 50px 150px;
   display: grid;
   grid-template-columns: 2fr 1fr;
 
@@ -10,14 +12,21 @@
 
   Button {
     width: 50%;
+    margin-bottom: 40px;
   }
+}
 
+.checkbox {
+  margin-bottom: 50px;
 }
 
 .idea-title {
   border: none;
   font-size: 3em;
   width: 90%;
+  font-family: $default-font;
+  font-weight: 600;
+  margin-bottom: 40px;
 }
 
 .idea-description {
@@ -25,6 +34,7 @@
   font-size: 1em;
   width: 90%;
   resize: none;
+  font-family: $default-font;
 }
 
 .idea-public {

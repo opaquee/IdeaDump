@@ -1,3 +1,4 @@
+import React from "react";
 import "./Explore.scss";
 
 const topics = [
@@ -12,7 +13,11 @@ const topics = [
   "Cult",
 ];
 const topicsDiv = topics.map((topic) => {
-  return <button className="topic">{topic}</button>;
+  return (
+    <button className="topic" key={topic} type="button">
+      {topic}
+    </button>
+  );
 });
 
 function Explore() {

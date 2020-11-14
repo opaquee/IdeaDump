@@ -1,4 +1,5 @@
 import "./App.css";
+import React from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Navbar from "./components/Navbar/index";
 import NewIdea from "./views/NewIdea";
@@ -10,11 +11,11 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Switch>
-          <Route exact={true} path="/">
+          <Route exact path="/">
             <Redirect to="/explore" />
           </Route>
-          <Route exact={true} path="/new-idea" component={NewIdea} />
-          <Route exact={true} path="/explore" component={Explore} />
+          <Route exact path="/new-idea" component={NewIdea} />
+          <Route exact path="/explore" component={Explore} />
         </Switch>
       </BrowserRouter>
     </div>

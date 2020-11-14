@@ -1,20 +1,15 @@
-import React, {Component} from "react";
+import React, { PureComponent } from "react";
 import "./Button.scss";
 
-class Button extends Component {
-
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (
-            <button className="default-button">
-                {this.props.children}
-            </button>
-        );
-    }
-
+class Button extends PureComponent {
+  render() {
+    const { children, onClick } = this.props;
+    return (
+      <button onClick={onClick} type="submit" className="default-button">
+        {children}
+      </button>
+    );
+  }
 }
 
 export default Button;
