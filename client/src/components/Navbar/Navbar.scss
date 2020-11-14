@@ -1,0 +1,30 @@
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  padding: 19px 140px 19px 140px;
+}
+
+li {
+  display: block;
+  color: black;
+  text-align: center;
+  padding-right: 40px;
+  text-decoration: none;
+}
+
+.left {
+  float: left;
+  font-size: 24px;
+}
+
+.right {
+  float: right;
+  font-size: 20px;
+  font-weight: lighter;
+}
+
+li:hover {
+  cursor: pointer;
+}
