@@ -27,12 +27,11 @@ class NewIdea extends PureComponent {
   }
 
   async componentDidMount() {
-    await ApiClient.get("/topics")
-      .then((topics) => {
-        this.setState({
-          topicOptions: topics,
-        });
+    await ApiClient.get("/topics").then((topics) => {
+      this.setState({
+        topicOptions: topics,
       });
+    });
   }
 
   render() {
