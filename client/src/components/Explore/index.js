@@ -151,7 +151,7 @@ function Explore() {
 
   const ideasDiv = ideas
     .filter((item) => {
-      return item.title.includes(search);
+      return item.title.toLowerCase().includes(search.toLowerCase());
     })
     .map((idea, id) => {
       return (
