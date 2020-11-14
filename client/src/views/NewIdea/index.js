@@ -9,6 +9,7 @@ import {
   FormControlLabel,
 } from "@material-ui/core";
 import { DropzoneDialog } from "material-ui-dropzone";
+import ApiClient from "../../ApiClient";
 import Button from "../../components/Button";
 import "./NewIdea.scss";
 
@@ -25,10 +26,13 @@ class NewIdea extends PureComponent {
     };
   }
 
-  componentDidMount() {
-    this.setState({
-      topicOptions: ["Technology", "Pickles", "Philosophy"],
-    });
+  async componentDidMount() {
+    await ApiClient.get("/topics")
+      .then((topics) => {
+        this.setState({
+          topicOptions: topics,
+        });
+      });
   }
 
   render() {
