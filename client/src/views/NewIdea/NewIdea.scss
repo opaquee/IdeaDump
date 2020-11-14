@@ -1,4 +1,37 @@
 .page-container {
+  margin: 3rem 2rem 3rem 2rem;
   display: grid;
   grid-template-columns: 2fr 1fr;
+
+  Button {
+    width: 50%;
+  }
+
+}
+
+.idea-title {
+  border: none;
+  font-size: 3em;
+  width: 90%;
+}
+
+.idea-description {
+  border: none;
+  font-size: 1em;
+  width: 90%;
+}
+
+.idea-public {
+  border-radius: 4px;
+}
+
+.category-select {
+  padding: 10px;
+  width: 80%;
+  border: 1px solid black;
+  border-radius: 4px;
+
+  option {
+    border: 1px solid black;
+  }
 }

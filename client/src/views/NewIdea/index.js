@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import "./NewIdea.scss";
+import Button from "../../components/Button";
 
 class NewIdea extends Component {
 
@@ -7,16 +8,21 @@ class NewIdea extends Component {
         return (
             <div className="page-container">
                 <div className="left-container">
-                    <input placeholder="My New Idea"/>
+                    <input
+                        className="idea-title"
+                        placeholder="My New Idea"/>
                     <h2>Upload Images</h2>
+                    <textarea
+                        className="idea-description"
+                        placeholder="Write a detailed description for your idea!"/>
                 </div>
                 <div className="right-container">
-                    <button>SUBMIT</button>
+                    <Button>Submit</Button>
                     <div>
-                        <input type="checkbox" name="public"/>
+                        <input className="idea-public" type="checkbox" name="public"/>
                         <label for="public">Viewable to others</label>
                     </div>
-                    <select>
+                    <select className="category-select">
                         <option>Test 1</option>
                         <option>Test 2</option>
                         <option>Test 3</option>
