@@ -46,3 +46,34 @@
   border-radius: 5px;
   background-color: #f9f9f9;
 }
+
+.ideas-container {
+  display: grid;
+  grid-template-columns: repeat(4, 256px);
+  grid-gap: 50px 50px;
+  justify-content: space-around;
+  margin-top: 50px;
+}
+
+.idea {
+  width: 256px;
+  height: 256px;
+  border: 2px solid #dfdfdf;
+  border-radius: 4px;
+  text-align: left;
+}
+
+.idea-title {
+  padding: 15px;
+  font-size: 26px;
+  font-weight: 500;
+}
+
+.explore-footer {
+  border-top: 1px solid #dfdfdf;
+  bottom: 0px;
+  width: 236px;
+  padding: 10px;
+  font-size: 12px;
+  margin-top: 150px;
+}
