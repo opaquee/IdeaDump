@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 db_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'sqlite.db')
 if os.name == 'Windows':
-    db_URI = 'sqlite:////' + db_dir
+    db_URI = 'sqlite:///' + db_dir
 else:
     db_URI = 'sqlite:////' + db_dir
 app.config['SQLALCHEMY_DATABASE_URI'] = db_URI
