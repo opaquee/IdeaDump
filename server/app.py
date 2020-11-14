@@ -21,8 +21,10 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-from models import Topic
+from models import Idea, Topic
+# from models import Post, Category
 
+"""
 class Idea:
     def __init__(self, id, topic, title, description, visible, author):
         self.id = id
@@ -44,16 +46,20 @@ class Idea:
 
 
 ideas = {}
-
+"""
 
 @app.route("/ideas/<topic>", methods=["GET"])
 def get_ideas(topic):
-    return jsonify(ideas=[idea.serial() for idea in ideas[topic]])
+    all_ideas_by_topic = Ideas.query.filter_by(topic_name=topic).all()
+    print(all_ideas_by_topic)
+    return None
 
 
 @app.route("/topics", methods=["GET"])
 def get_topics():
-    return jsonify(topics=[topic for topic in ideas])
+    all_topics = Topic.query.all()
+    print(all_topics)
+    return None
 
 
 @app.route("/ideas/<topic>", methods=["POST"])
@@ -63,24 +69,22 @@ def post_idea(topic):
     description = request.args.get("description")
     visible = request.args.get("visible")
     author = request.args.get("author")
-    idea = Idea(id, topic, title, description, visible, author)
+    #idea = Idea(id, topic, title, description, visible, author)
+    tp = Topic(name=topic)
+    idea = Idea(title=title, description=description, visible=True, author=author, topic=tp)
 
     print("###########################################")
-    print(idea.id, idea.topic, idea.title, idea.description, idea.visible, idea.author)
+    print(id, topic, title, description, visible, author)
     print("###########################################")
 
-    if topic in ideas:
-        ideas[topic].append(idea)
-    else:
-        ideas[topic] = [idea]
+    db.session.add(tp)
+    db.session.commit()
 
-    return json.dumps(idea.__dict__)
+    return idea.id
 
 
 @app.route("/idea/<ideaId>", methods=["GET"])
 def get_idea(ideaId):
-    for topic in ideas:
-        for idea in ideas[topic]:
-            if idea.id == ideaId:
-                return jsonify(idea.serial())
+    idea = Idea.query.filter_by(id=ideaId).first()
+    print(idea)
     return None
