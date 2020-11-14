@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 import {
   Select,
   MenuItem,
@@ -9,24 +9,54 @@ import {
   FormControlLabel,
 } from "@material-ui/core";
 import { DropzoneDialog } from "material-ui-dropzone";
+import ApiClient from "../../ApiClient";
 import Button from "../../components/Button";
 import "./NewIdea.scss";
 
-class NewIdea extends PureComponent {
+class NewIdea extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      title: "",
       images: [],
+      description: "",
+      topic: "",
+      topicOptions: [],
       uploadDialogOpen: false,
     };
   }
 
+  async componentDidMount() {
+    await ApiClient.get("/topics").then((topics) => {
+      this.setState({
+        topicOptions: topics,
+      });
+    });
+  }
+
   render() {
-    const { images, uploadDialogOpen } = this.state;
+    const {
+      title,
+      images,
+      description,
+      topic,
+      topicOptions,
+      uploadDialogOpen,
+    } = this.state;
     return (
       <div className="page-container">
         <div className="left-container">
-          <input className="idea-title" placeholder="My New Idea" />
+          <input
+            className="create-idea-title"
+            placeholder="My New Idea"
+            type="text"
+            value={title}
+            onChange={(e) => {
+              this.setState({
+                title: e.target.value,
+              });
+            }}
+          />
           <h2>Upload Images</h2>
           <Button
             onClick={() => {
@@ -69,6 +99,12 @@ class NewIdea extends PureComponent {
             className="idea-description"
             rowsMin={3}
             placeholder="Write a detailed description for your idea!"
+            value={description}
+            onChange={(e) => {
+              this.setState({
+                description: e.target.value,
+              });
+            }}
           />
         </div>
         <div className="right-container">
@@ -85,11 +121,24 @@ class NewIdea extends PureComponent {
             label="Allow everyone to view this idea"
           />
           <FormControl variant="outlined">
-            <InputLabel>Topic</InputLabel>
-            <Select label="Topic">
-              <MenuItem>Test 1</MenuItem>
-              <MenuItem>Test 2</MenuItem>
-              <MenuItem>Test 3</MenuItem>
+            <InputLabel id="topic-selector-label">Topic</InputLabel>
+            <Select
+              label="Topic"
+              labelId="topic-selector-label"
+              value={topic}
+              onChange={(e) => {
+                this.setState({
+                  topic: e.target.value,
+                });
+              }}
+            >
+              {topicOptions.map((option) => {
+                return (
+                  <MenuItem key={option} value={option}>
+                    {option}
+                  </MenuItem>
+                );
+              })}
             </Select>
           </FormControl>
         </div>
