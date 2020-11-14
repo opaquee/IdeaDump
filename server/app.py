@@ -75,9 +75,9 @@ def post_idea(topic):
     return json.dumps(idea.__dict__)
 
 
-@app.route("/idea/<topic>/<ideaId>", methods=["GET"])
-def get_idea(topic, ideaId):
-    for idea in ideas[topic]:
+@app.route("/idea/<ideaId>", methods=["GET"])
+def get_idea(ideaId):
+    for idea in ideas:
         if idea.id == ideaId:
             return jsonify(idea.serial())
     return None
