@@ -1,5 +1,8 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import "./Explore.scss";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const topics = [
   "Feed",
@@ -22,6 +25,7 @@ function Explore() {
       visible: false,
       author: "Ulises",
       topic: "Feed",
+      id: 1,
     },
     {
       title: "Daltfresh",
@@ -29,6 +33,7 @@ function Explore() {
       visible: true,
       author: "Ivor",
       topic: "Feed",
+      id: 2,
     },
     {
       title: "Pannier",
@@ -36,6 +41,7 @@ function Explore() {
       visible: false,
       author: "Gian",
       topic: "Feed",
+      id: 2,
     },
     {
       title: "Bitchip",
@@ -43,6 +49,7 @@ function Explore() {
       visible: false,
       author: "Evan",
       topic: "Feed",
+      id: 2,
     },
     {
       title: "Quo Lux",
@@ -51,6 +58,7 @@ function Explore() {
       visible: false,
       author: "Lannie",
       topic: "Feed",
+      id: 2,
     },
     {
       title: "Stringtough",
@@ -58,6 +66,7 @@ function Explore() {
       visible: true,
       author: "Bary",
       topic: "Pickles",
+      id: 2,
     },
     {
       title: "Stronghold",
@@ -65,6 +74,7 @@ function Explore() {
       visible: true,
       author: "Raymund",
       topic: "Pickles",
+      id: 2,
     },
     {
       title: "Sonsing",
@@ -72,6 +82,7 @@ function Explore() {
       visible: false,
       author: "Julian",
       topic: "Pickles",
+      id: 2,
     },
     {
       title: "Biodex",
@@ -79,6 +90,7 @@ function Explore() {
       visible: false,
       author: "Benyamin",
       topic: "Pickles",
+      id: 2,
     },
     {
       title: "Tempsoft",
@@ -86,6 +98,7 @@ function Explore() {
       visible: true,
       author: "Kareem",
       topic: "Pickles",
+      id: 2,
     },
     {
       title: "Mat Lam Tam",
@@ -93,6 +106,7 @@ function Explore() {
       visible: true,
       author: "Darrick",
       topic: "Apps",
+      id: 2,
     },
     {
       title: "Cardify",
@@ -101,6 +115,7 @@ function Explore() {
       visible: true,
       author: "Moshe",
       topic: "Apps",
+      id: 2,
     },
     {
       title: "Home Ing",
@@ -108,6 +123,7 @@ function Explore() {
       visible: false,
       author: "Garrick",
       topic: "Apps",
+      id: 2,
     },
     {
       title: "Temp",
@@ -115,6 +131,7 @@ function Explore() {
       visible: false,
       author: "Christoph",
       topic: "Sports",
+      id: 2,
     },
     {
       title: "Lotstring",
@@ -122,6 +139,7 @@ function Explore() {
       visible: false,
       author: "Clark",
       topic: "Sports",
+      id: 2,
     },
   ]);
   const [search, setSearch] = useState("");
@@ -133,6 +151,10 @@ function Explore() {
   const handleSearch = (event) => {
     setSearch(event.target.value);
   };
+
+  // const ideaNavigate = (idea) => {
+  //   console.log(idea.title);
+  // };
 
   const topicsDiv = topics.map((topic) => {
     return (
@@ -160,8 +182,17 @@ function Explore() {
           className="idea"
           style={{ display: active === idea.topic ? "block" : "none" }}
         >
-          <div className="idea-title">{idea.title}</div>
-          <footer className="explore-footer">{idea.author}</footer>
+          <Link
+            key={id.toString()}
+            to={`idea/${idea.id}`}
+            style={{
+              textDecoration: "none",
+              color: "#494949",
+            }}
+          >
+            <div className="idea-title">{idea.title}</div>
+            <footer className="explore-footer">{idea.author}</footer>
+          </Link>
         </div>
       );
     });
