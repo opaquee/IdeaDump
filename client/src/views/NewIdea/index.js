@@ -16,17 +16,44 @@ class NewIdea extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
+      title: "",
       images: [],
+      description: "",
+      topic: "",
+      topicOptions: [],
       uploadDialogOpen: false,
     };
   }
 
+  componentDidMount() {
+    this.setState({
+      topicOptions: ["Technology", "Pickles", "Philosophy"],
+    });
+  }
+
   render() {
-    const { images, uploadDialogOpen } = this.state;
+    const {
+      title,
+      images,
+      description,
+      topic,
+      topicOptions,
+      uploadDialogOpen,
+    } = this.state;
     return (
       <div className="page-container">
         <div className="left-container">
-          <input className="idea-title" placeholder="My New Idea" />
+          <input
+            className="idea-title"
+            placeholder="My New Idea"
+            type="text"
+            value={title}
+            onChange={(e) => {
+              this.setState({
+                title: e.target.value,
+              });
+            }}
+          />
           <h2>Upload Images</h2>
           <Button
             onClick={() => {
@@ -69,6 +96,12 @@ class NewIdea extends PureComponent {
             className="idea-description"
             rowsMin={3}
             placeholder="Write a detailed description for your idea!"
+            value={description}
+            onChange={(e) => {
+              this.setState({
+                description: e.target.value,
+              });
+            }}
           />
         </div>
         <div className="right-container">
@@ -85,11 +118,24 @@ class NewIdea extends PureComponent {
             label="Allow everyone to view this idea"
           />
           <FormControl variant="outlined">
-            <InputLabel>Topic</InputLabel>
-            <Select label="Topic">
-              <MenuItem>Test 1</MenuItem>
-              <MenuItem>Test 2</MenuItem>
-              <MenuItem>Test 3</MenuItem>
+            <InputLabel id="topic-selector-label">Topic</InputLabel>
+            <Select
+              label="Topic"
+              labelId="topic-selector-label"
+              value={topic}
+              onChange={(e) => {
+                this.setState({
+                  topic: e.target.value,
+                });
+              }}
+            >
+              {topicOptions.map((option) => {
+                return (
+                  <MenuItem key={option} value={option}>
+                    {option}
+                  </MenuItem>
+                );
+              })}
             </Select>
           </FormControl>
         </div>
