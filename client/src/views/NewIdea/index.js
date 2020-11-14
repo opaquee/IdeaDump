@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 import {
   Select,
   MenuItem,
@@ -13,7 +13,7 @@ import ApiClient from "../../ApiClient";
 import Button from "../../components/Button";
 import "./NewIdea.scss";
 
-class NewIdea extends PureComponent {
+class NewIdea extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,12 +27,11 @@ class NewIdea extends PureComponent {
   }
 
   async componentDidMount() {
-    await ApiClient.get("/topics")
-      .then((topics) => {
-        this.setState({
-          topicOptions: topics,
-        });
+    await ApiClient.get("/topics").then((topics) => {
+      this.setState({
+        topicOptions: topics,
       });
+    });
   }
 
   render() {
