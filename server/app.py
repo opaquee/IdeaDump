@@ -22,69 +22,72 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 from models import Idea, Topic
-# from models import Post, Category
 
-"""
-class Idea:
-    def __init__(self, id, topic, title, description, visible, author):
-        self.id = id
-        self.topic = topic
-        self.title = title
-        self.description = description
-        self.visible = visible
-        self.author = author
-
-    def serial(self):
-        return {
-            "id": self.id,
-            "topic": self.topic,
-            "title": self.title,
-            "description": self.description,
-            "visible": self.visible,
-            "author": self.author,
-        }
-
-
-ideas = {}
-"""
-
+# TODO: Write a serialize function for each model so that they can
+# be represented as a JSON object with very little work
 @app.route("/ideas/<topic>", methods=["GET"])
 def get_ideas(topic):
-    all_ideas_by_topic = Ideas.query.filter_by(topic_name=topic).all()
-    print(all_ideas_by_topic)
-    return None
+    if topic == "all":
+        all_ideas_by_topic = Idea.query.all()
+    else:
+        all_ideas_by_topic = Idea.query.filter_by(topic_name=topic).all()
+
+    serialized_ideas = [{
+        "id": idea.id,
+        "title": idea.title,
+        "description": idea.description,
+        "visible": idea.visible,
+        "author": idea.author,
+        "topic": idea.topic_name
+    } for idea in all_ideas_by_topic]
+    return jsonify(serialized_ideas)
 
 
 @app.route("/topics", methods=["GET"])
 def get_topics():
     all_topics = Topic.query.all()
-    print(all_topics)
-    return None
+    all_topics_list = [topic.name for topic in all_topics]
+    return jsonify(all_topics_list)
 
 
 @app.route("/ideas/<topic>", methods=["POST"])
 def post_idea(topic):
-    id = request.args.get("id")
     title = request.args.get("title")
     description = request.args.get("description")
     visible = request.args.get("visible")
     author = request.args.get("author")
-    #idea = Idea(id, topic, title, description, visible, author)
-    tp = Topic(name=topic)
+
+    tp = Topic.query.filter_by(name=topic).first()
+    if tp is None:
+        tp = Topic(name=topic)
+
     idea = Idea(title=title, description=description, visible=True, author=author, topic=tp)
 
     print("###########################################")
-    print(id, topic, title, description, visible, author)
+    print(topic, title, description, visible, author)
     print("###########################################")
 
     db.session.add(tp)
     db.session.commit()
 
-    return idea.id
+    return jsonify(
+        id=idea.id,
+        title=idea.title,
+        description=idea.description,
+        visible=idea.visible,
+        author=idea.author,
+        topic=idea.topic_name   
+    )
 
 
 @app.route("/idea/<ideaId>", methods=["GET"])
 def get_idea(ideaId):
     idea = Idea.query.filter_by(id=ideaId).first()
-    print(idea)
-    return None
+    return jsonify(
+        id=idea.id,
+        title=idea.title,
+        description=idea.description,
+        visible=idea.visible,
+        author=idea.author,
+        topic=idea.topic_name   
+    )

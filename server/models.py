@@ -13,7 +13,7 @@ class Idea(db.Model):
         backref=db.backref('ideas', lazy=True))
 
     def __repr__(self):
-        return '<Post %r>' % self.title
+        return '<Idea %r>' % self.title
 
 
 class Topic(db.Model):

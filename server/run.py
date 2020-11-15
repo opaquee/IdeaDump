@@ -1,5 +1,5 @@
 # 
-from app import app, db, Idea, Topic
+from app import app, db, Idea, Topic, jsonify
 # from app import app, db, Post, Category
 """
 tp = Topic(name='Pickle')
@@ -12,7 +12,9 @@ topics = Topic.query.all()
 ideas = Idea.query.all()
 print(topics)
 print(ideas)
-
+topic1 = Topic.query.filter_by(name="Pickle").first()
+serialized_ideas = [{ "idea": idea.title } for idea in topic1.ideas]
+print(serialized_ideas)
 '''
 py = Category(name='Python')
 Post(title='Hello Python!', category=py)
