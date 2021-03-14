@@ -10,10 +10,12 @@ class Config:
     Set Flask config variables here
     """
 
-    SECRET_KEY = environ.get("SECRET_KEY")
+    # SECRET_KEY = environ.get("SECRET_KEY")
+    SECRET_KEY = "Test"
     STATIC_FOLDER = "static"
 
 
+# TODO: Set hardended security measures and config for production instance
 class ProdConfig(Config):
     FLASK_ENV = "production"
     DEBUG = False
@@ -25,4 +27,4 @@ class DevConfig(Config):
     FLASK_ENV = "development"
     DEBUG = True
     TESTING = True
-    DATABASE_URI = environ.get("DEV_DATABASE_URI")
+    SQLALCHEMY_DATABASE_URI = environ.get("DEV_DATABASE_URI")

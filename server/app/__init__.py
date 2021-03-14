@@ -6,9 +6,9 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 
+# TODO: Explicit package versions in requirements.txt
 def create_app():
-    # TODO: Figure out idea configuration setup
-    app = Flask(__name__, instance_relative_config=True)
+    app = Flask(__name__)
     app.config.from_object("config.DevConfig")
 
     # Intialize database
@@ -19,6 +19,8 @@ def create_app():
         from . import ideas
         from . import topics
 
+        app.logger.info("App's getting created!!!!!")
+        db.create_all()
         # Register blueprints
         app.register_blueprint(ideas.bp)
         app.register_blueprint(topics.bp)

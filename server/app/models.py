@@ -8,7 +8,7 @@ class Idea(db.Model):
     visible = db.Column(db.Boolean(True), nullable=False)
     author = db.Column(db.String(255), nullable=False)
 
-    topic_name = db.Column(db.Integer, db.ForeignKey("topic.name"), nullable=False)
+    topic_name = db.Column(db.String(255), db.ForeignKey("topic.name"), nullable=False)
     topic = db.relationship("Topic", backref=db.backref("ideas", lazy=True))
 
     def __repr__(self):

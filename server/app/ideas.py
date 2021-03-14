@@ -1,17 +1,19 @@
 from flask import Blueprint, jsonify, request
 
-from models import Idea, Topic
+from .models import Idea, Topic
 from app import db
 
 bp = Blueprint("idea", __name__)
 
-
 # TODO: Write a serialize function for each model so that they can
 # be represented as a JSON object with very little work
+
+
 # Gets all the ideas for a particular topic
 @bp.route("/ideas/<topic>", methods=["GET"])
 def get_ideas(topic):
     if topic == "all":
+        print("DEBUG: Geting all ideas")
         all_ideas_by_topic = Idea.query.all()
     else:
         all_ideas_by_topic = Idea.query.filter_by(topic_name=topic).all()
