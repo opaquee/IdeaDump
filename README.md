@@ -25,6 +25,10 @@ Coming soon!
 DEV_DATABASE_URI=postgresql://devUser:devPassword@db:5432/devDB
 ```
 
-3. Run docker-compose up --build
+3. Build and run the application with Docker
+
+```sh
+cd server && docker-compose up --build
+```
 
 4. Profit!
