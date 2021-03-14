@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  api:
+    build: .
+    ports:
+      - "5000:5000"
+    env_file:
+      - .env.api
+    volumes:
+      - .:/api
+  db:
+    image: postgres
+    volumes:
+      - db_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=devUser
+      - POSTGRES_PASSWORD=devPassword
+      - POSTGRES_DB=devDB
+
+volumes:
+  db_data:
